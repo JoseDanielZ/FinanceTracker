@@ -1,0 +1,29 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-09-27T18:00:00Z" },
+  "title": "FinanceTracker iOS Mockups",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 390, "h": 844, "title": "1. Bienvenida", "is_interactive": true },
+    "Summary.dc.html": { "x": 470, "y": 0, "w": 390, "h": 844, "title": "2. Resumen", "is_interactive": true },
+    "Income.dc.html": { "x": 940, "y": 0, "w": 390, "h": 844, "title": "3. Ingresos", "is_interactive": true },
+    "Expenses.dc.html": { "x": 1410, "y": 0, "w": 390, "h": 844, "title": "4. Gastos", "is_interactive": true },
+    "Budgets.dc.html": { "x": 1880, "y": 0, "w": 390, "h": 844, "title": "5. Presupuestos", "is_interactive": true },
+    "History.dc.html": { "x": 2350, "y": 0, "w": 390, "h": 844, "title": "6. Historial mensual", "is_interactive": true },
+    "Widget.dc.html": { "x": 0, "y": 964, "w": 390, "h": 800, "title": "7. Widget de pantalla de inicio", "is_interactive": true }
+  },
+  "order": [
+    "Main.dc.html",
+    "Summary.dc.html",
+    "Income.dc.html",
+    "Expenses.dc.html",
+    "Budgets.dc.html",
+    "History.dc.html",
+    "Widget.dc.html"
+  ],
+  "notes": {
+    "flow-title": { "x": 0, "y": -140, "text": "Flujo principal — usa el prop \"theme\" de cada pantalla para ver claro/oscuro", "kind": "title1", "maxW": 2740 }
+  },
+  "designSystems": []
+}

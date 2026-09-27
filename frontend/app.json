@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "FinanceTracker",
+    "slug": "financetracker",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.josedanielz.financetracker",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Usamos Face ID para proteger el acceso a tus finanzas."
+      }
+    }
+  }
+}

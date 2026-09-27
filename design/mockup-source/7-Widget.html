@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Widget de pantalla de inicio</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+body{margin:0;}
+*{box-sizing:border-box;}
+button{font-family:inherit;border:none;cursor:pointer;background:none;padding:0;margin:0;text-align:inherit;color:inherit;}
+input{font-family:inherit;}
+</style>
+</helmet>
+<div style="width:390px;height:800px;background:{{colors.bg}};font-family:'IBM Plex Sans',sans-serif;color:{{colors.textPrimary}};padding:52px 24px 40px;display:flex;flex-direction:column;align-items:center;gap:26px;">
+
+  <div style="align-self:flex-start;display:flex;flex-direction:column;gap:6px;">
+    <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;">Widget · Pantalla de inicio</div>
+    <div style="font-size:13px;color:{{colors.textSecondary}};line-height:1.5;max-width:330px;">Prototipo tocable: elige categoría, escribe el monto y se guarda — como tu Atajo, en un paso menos. Usa "tipo" en Tweaks para Gasto/Ingreso.</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <div style="width:158px;height:158px;border-radius:26px;background:{{colors.surface}};border:1px solid {{colors.border}};box-shadow:{{colors.shadow}};padding:16px;display:flex;flex-direction:column;justify-content:space-between;">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div style="font-size:10.5px;font-weight:600;color:{{colors.textSecondary}};">Registro rápido</div>
+        <div style="width:16px;height:16px;border-radius:5px;background:{{colors.income}};display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:3px;"><div style="width:2px;height:4px;border-radius:1px;background:#fff;"></div><div style="width:2px;height:6px;border-radius:1px;background:#fff;"></div></div>
+      </div>
+      <a href="#" style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <div style="width:44px;height:44px;border-radius:999px;background:{{typeColor}};display:flex;align-items:center;justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        </div>
+        <div style="font-size:10.5px;font-weight:600;color:{{colors.textPrimary}};">{{typeLabel}}</div>
+      </a>
+    </div>
+    <div style="font-size:11px;color:{{colors.textSecondary}};max-width:200px;text-align:center;">Tamaño pequeño — en un iPhone real esto solo puede abrir la app (los widgets no muestran teclado)</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+    <div style="width:338px;height:158px;border-radius:26px;background:{{colors.surface}};border:1px solid {{colors.border}};box-shadow:{{colors.shadow}};padding:14px 16px;">
+
+      <sc-if value="{{isIdle}}" hint-placeholder-val="{{true}}">
+      <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:12px;font-weight:700;color:{{typeColor}};">{{typeLabel}}</div>
+          <div style="width:16px;height:16px;border-radius:5px;background:{{colors.income}};display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:3px;"><div style="width:2px;height:4px;border-radius:1px;background:#fff;"></div><div style="width:2px;height:6px;border-radius:1px;background:#fff;"></div></div>
+        </div>
+
+        <sc-if value="{{isGasto}}" hint-placeholder-val="{{true}}">
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;">
+          <button onClick="{{pickComida}}" aria-label="Comida" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:5px 4px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v7a2 2 0 0 0 2 2v9"/><path d="M7 3v5"/><path d="M10 3v5"/><path d="M17 3c-1.5 0-2.5 1.8-2.5 5s1 5 2.5 5v9"/></svg>
+            <span style="font-size:8.5px;font-weight:600;color:{{colors.textPrimary}};">Comida</span>
+          </button>
+          <button onClick="{{pickRopa}}" aria-label="Ropa" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:5px 4px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l4 3-2 3-2-1.2V20H8V8.8L6 10 4 7l4-3 2 1.5h4L16 4z"/></svg>
+            <span style="font-size:8.5px;font-weight:600;color:{{colors.textPrimary}};">Ropa</span>
+          </button>
+          <button onClick="{{pickPareja}}" aria-label="Pareja" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:5px 4px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19s-6.5-4-8.5-8A4.5 4.5 0 0 1 12 6.3 4.5 4.5 0 0 1 20.5 11c-2 4-8.5 8-8.5 8z"/></svg>
+            <span style="font-size:8.5px;font-weight:600;color:{{colors.textPrimary}};">Pareja</span>
+          </button>
+          <button onClick="{{pickEntretenimiento}}" aria-label="Entretenimiento" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:5px 4px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M10 9.3v5.4l4.5-2.7z" fill="{{typeColor}}" stroke="none"/></svg>
+            <span style="font-size:8.5px;font-weight:600;color:{{colors.textPrimary}};">Entretenimiento</span>
+          </button>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{isIngreso}}" hint-placeholder-val="{{false}}">
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;">
+          <button onClick="{{pickSueldo}}" aria-label="Sueldo" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:8px 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>
+            <span style="font-size:9px;font-weight:600;color:{{colors.textPrimary}};">Sueldo</span>
+          </button>
+          <button onClick="{{pickSemanal}}" aria-label="Semanal" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:8px 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16"/><path d="M8 3v4"/><path d="M16 3v4"/></svg>
+            <span style="font-size:9px;font-weight:600;color:{{colors.textPrimary}};">Semanal</span>
+          </button>
+          <button onClick="{{pickExtra}}" aria-label="Extra" style="display:flex;flex-direction:column;align-items:center;gap:3px;background:{{typeTint}};border-radius:12px;padding:8px 4px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{typeColor}}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="10" rx="1.5"/><path d="M4 9h16"/><path d="M12 9v10"/><path d="M12 9c-1.5-3-6-3-6 0"/><path d="M12 9c1.5-3 6-3 6 0"/></svg>
+            <span style="font-size:9px;font-weight:600;color:{{colors.textPrimary}};">Extra</span>
+          </button>
+        </div>
+        </sc-if>
+
+        <a href="#" style="display:flex;align-items:center;justify-content:center;gap:5px;height:20px;border-radius:8px;background:{{colors.surfaceAlt}};color:{{colors.textSecondary}};font-size:9.5px;font-weight:600;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          Otras categorías
+        </a>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{isAmount}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;flex-direction:column;justify-content:space-between;height:100%;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:12px;font-weight:700;color:{{typeColor}};">{{typeLabel}} · {{category}}</div>
+          <div style="width:16px;height:16px;border-radius:5px;background:{{colors.income}};display:flex;align-items:flex-end;justify-content:center;gap:2px;padding:3px;"><div style="width:2px;height:4px;border-radius:1px;background:#fff;"></div><div style="width:2px;height:6px;border-radius:1px;background:#fff;"></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label for="widgetMonto" style="font-size:10px;color:{{colors.textSecondary}};">¿Cuánto?</label>
+          <input id="widgetMonto" type="number" inputmode="decimal" placeholder="0.00" value="{{monto}}" onChange="{{setMonto}}" style="height:30px;border-radius:10px;border:1px solid {{colors.border}};background:{{colors.bg}};color:{{colors.textPrimary}};font-size:15px;font-weight:600;padding:0 10px;width:100%;"/>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onClick="{{cancel}}" style="flex:1;height:26px;border-radius:9px;background:{{colors.surfaceAlt}};color:{{colors.textSecondary}};font-size:11px;font-weight:600;">Cancelar</button>
+          <button onClick="{{save}}" style="flex:1;height:26px;border-radius:9px;background:{{typeColor}};color:#FFFFFF;font-size:11px;font-weight:600;">Guardar</button>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{isSaved}}" hint-placeholder-val="{{false}}">
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:7px;">
+        <div style="width:36px;height:36px;border-radius:999px;background:{{colors.incomeTint}};display:flex;align-items:center;justify-content:center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{colors.income}}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <div style="font-size:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:{{colors.textPrimary}};background:{{colors.surfaceAlt}};border-radius:8px;padding:4px 10px;">{{lastLine}}</div>
+        <button onClick="{{reset}}" style="height:24px;padding:0 14px;border-radius:9px;background:{{typeColor}};color:#FFFFFF;font-size:10.5px;font-weight:600;">Nuevo registro</button>
+      </div>
+      </sc-if>
+
+    </div>
+    <div style="font-size:11px;color:{{colors.textSecondary}};max-width:280px;text-align:center;">Tamaño mediano, interactivo — toca una categoría, escribe el monto y presiona Guardar</div>
+  </div>
+
+  <div style="font-size:12px;color:{{colors.textSecondary}};text-align:center;line-height:1.6;max-width:320px;">En un iPhone real, tocar una categoría abriría la app en una hoja mínima enfocada directo en el teclado del monto (los widgets no pueden mostrar un teclado por sí solos) — el efecto es el mismo, un paso menos que tu Atajo actual.</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["light","dark"],"default":"light"},"tipo":{"editor":"enum","options":["gasto","ingreso"],"default":"gasto"},"$preview":{"width":390,"height":800}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: "idle", category: "", monto: "", lastLine: "" };
+  }
+  renderVals() {
+    const dark = (this.props.theme ?? "light") === "dark";
+    const gastoMode = (this.props.tipo ?? "gasto") === "gasto";
+    const colors = {
+      bg: dark ? "#121316" : "#F7F5F1",
+      surface: dark ? "#1C1E22" : "#FFFFFF",
+      surfaceAlt: dark ? "#24262B" : "#EFEBE4",
+      border: dark ? "#2A2D31" : "#E7E3DC",
+      textPrimary: dark ? "#F2F1EE" : "#1B1D1F",
+      textSecondary: dark ? "#9B978F" : "#6B6862",
+      income: dark ? "#3FA6AE" : "#1F6F78",
+      incomeTint: dark ? "#1B3236" : "#E4EFEE",
+      expense: dark ? "#E08A52" : "#C1662E",
+      expenseTint: dark ? "#332419" : "#F6E9DE",
+      shadow: dark ? "0 8px 24px rgba(0,0,0,0.45)" : "0 8px 24px rgba(27,29,31,0.10)"
+    };
+    const typeColor = gastoMode ? colors.expense : colors.income;
+    const typeTint = gastoMode ? colors.expenseTint : colors.incomeTint;
+    const typeLabel = gastoMode ? "Agregar gasto" : "Agregar ingreso";
+    const typeWord = gastoMode ? "Gasto" : "Ingreso";
+
+    const pick = (cat) => () => this.setState({ step: "amount", category: cat, monto: "" });
+    const cancel = () => this.setState({ step: "idle", category: "", monto: "" });
+    const reset = () => this.setState({ step: "idle", category: "", monto: "", lastLine: "" });
+    const setMonto = (e) => this.setState({ monto: e.target.value });
+    const save = () => {
+      const fecha = new Date().toISOString().slice(0, 10);
+      const monto = this.state.monto && this.state.monto !== "" ? this.state.monto : "0";
+      const linea = fecha + ";" + typeWord + ";" + this.state.category + ";" + monto;
+      this.setState({ step: "saved", lastLine: linea });
+    };
+
+    return {
+      colors, typeColor, typeTint, typeLabel,
+      isGasto: gastoMode,
+      isIngreso: !gastoMode,
+      isIdle: this.state.step === "idle",
+      isAmount: this.state.step === "amount",
+      isSaved: this.state.step === "saved",
+      category: this.state.category,
+      monto: this.state.monto,
+      lastLine: this.state.lastLine,
+      pickComida: pick("Comida"),
+      pickRopa: pick("Ropa"),
+      pickPareja: pick("Pareja"),
+      pickEntretenimiento: pick("Entretenimiento"),
+      pickSueldo: pick("Sueldo"),
+      pickSemanal: pick("Semanal"),
+      pickExtra: pick("Extra"),
+      cancel, save, setMonto, reset
+    };
+  }
+}
+</script>
+</body>
+</html>
